@@ -30,6 +30,11 @@ enum {
 
 bool GSMSSLClient::_rootCertsLoaded = false;
 
+void GSMSSLClient::loadRootCerts(bool on) {
+  _rootCertsLoaded = !on;
+}
+
+
 GSMSSLClient::GSMSSLClient(bool synch) :
   GSMClient(synch)
 {

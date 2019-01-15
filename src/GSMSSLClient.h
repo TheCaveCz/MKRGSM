@@ -33,6 +33,8 @@ public:
   virtual int connect(IPAddress ip, uint16_t port);
   virtual int connect(const char* host, uint16_t port);
 
+  static void loadRootCerts(bool on);
+
 private:
   static bool _rootCertsLoaded;
   int _certIndex;
