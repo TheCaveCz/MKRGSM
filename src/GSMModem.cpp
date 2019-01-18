@@ -45,3 +45,21 @@ String GSMModem::getIMEI()
 
   return imei;
 }
+
+String GSMModem::getICCID()
+{
+  String iccid;
+
+  iccid.reserve(30);
+
+  MODEM.send("AT+CCID");
+  MODEM.waitForResponse(100, &iccid);
+
+  if (iccid.startsWith("+CCID: ")) {
+    return iccid.substring(7);
+  } else {
+    return "";
+  }
+
+  
+}

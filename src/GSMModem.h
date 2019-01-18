@@ -37,6 +37,11 @@ public:
       @return modem IMEI number
    */
   String getIMEI();
+
+  /** Obtain SIM ICCID (command AT). Requires PIN.
+      @return SIM ICCID number
+   */
+  String getICCID();
 };
 
 #endif
