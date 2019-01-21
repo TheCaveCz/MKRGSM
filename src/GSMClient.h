@@ -130,6 +130,14 @@ public:
 
   void setSecurityProfile(int id);
 
+  /** Set timeout for connecting
+   */
+  void setConnectTimeout(unsigned long timeout);
+
+  /** Set timeout for socket operations
+   */
+  void setSocketTimeout(unsigned long timeout);
+
   virtual void handleUrc(const String& urc);
 
 private:
@@ -148,6 +156,9 @@ private:
 
   bool _writeSync;
   String _response;
+
+  unsigned long _connectTimeout;
+  unsigned long _socketTimeout;
 };
 
 #endif
