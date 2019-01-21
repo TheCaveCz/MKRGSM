@@ -25,6 +25,12 @@
 #include "Modem.h"
 
 enum {
+  SSL_ROOT_CERT   = 0,
+  SSL_CLIENT_CERT = 1,
+  SSL_PRIVATE_KEY = 2
+};
+
+enum {
   SSL_VERSION_ANY     = 0,
   SSL_VERSION_TLS_1_0 = 1,
   SSL_VERSION_TLS_1_1 = 2,
@@ -57,7 +63,7 @@ enum {
   SSL_CIPHER_TLS_RSA_PSK_WITH_AES_256_CBC_SHA384 = 15
 };
 
-class GSMSecurity : public ModemUrcHandler {
+class GSMSecurity {
 
 public:
   GSMSecurity(int id = 0);
@@ -68,33 +74,18 @@ public:
   /** Check modem response and restart it
    */
   void begin();
-  void handleUrc(const String& urc);
 
-  int listAllCertificates();
-  int removeAllCertificates();
   int setValidation(int val);
   int setVersion(int val);
   int setCipher(int val);
-  int setRootCertificate(const char* cert);
-  int setClientCertificate(const char* cert);
-  int setPrivateKey(const char* cert);
+  int setRootCertificate(const char* name);
+  int setClientCertificate(const char* name);
+  int setPrivateKey(const char* name);
 
 private:
-  int setCertificate(int type, const char* name, const char* cert);
+  int setCertificate(int type, const char* name);
 
-  // TODO: make _id autoincrement
   int _id;
-  int _sslValidation;
-  int _sslVersion;
-  int _sslCipher;
-  const char* _sslServerHostname;
-
-  #define MAX_CERTS 3
-  struct {
-    int type = -1;
-    String name;
-    String hash;
-  } _certs[MAX_CERTS];
 };
 
 #endif
