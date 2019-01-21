@@ -128,6 +128,8 @@ public:
    */
   void stop();
 
+  /** Set ID of security profile to use for this client
+   */
   void setSecurityProfile(int id);
 
   /** Set timeout for connecting
