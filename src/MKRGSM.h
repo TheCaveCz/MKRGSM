@@ -36,4 +36,6 @@
 #include "GSMUdp.h"
 #include "GSMLocation.h"
 
+#include "GSMCertificates.h"
+
 #endif
