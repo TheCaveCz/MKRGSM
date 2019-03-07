@@ -38,7 +38,7 @@ public:
    */
   String getIMEI();
 
-  /** Obtain SIM ICCID (command AT). Requires PIN.
+  /** Obtain SIM card ICCID (command AT)
       @return SIM ICCID number
    */
   String getICCID();
