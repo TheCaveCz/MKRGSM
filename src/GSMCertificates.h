@@ -44,11 +44,11 @@ public:
   bool hasCertificate(const char * name);
   bool hasCertificate(String& name) { return hasCertificate(name.c_str()); }
 
-  int save(int type, const char* name, const char* data, size_t len);
-  int save(int type, String& name, const char* data, size_t len) { return save(type, name.c_str(), data, len); }
+  int save(int type, const char* name, const char* data, size_t len, bool doList = true);
+  int save(int type, String& name, const char* data, size_t len, bool doList = true) { return save(type, name.c_str(), data, len, doList); }
 
-  int remove(int type, const char* name);
-  int remove(int type, String& name) { return remove(type, name.c_str()); }
+  int remove(int type, const char* name, bool doList = true);
+  int remove(int type, String& name, bool doList = true) { return remove(type, name.c_str(), doList); }
 
   int removeAll();
 

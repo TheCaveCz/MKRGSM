@@ -147,7 +147,7 @@ int GSMCertificates::indexOf(const char* name)
   return -1;
 }
 
-int GSMCertificates::save(int type, const char* name, const char* data, size_t len)
+int GSMCertificates::save(int type, const char* name, const char* data, size_t len, bool doList)
 {
   MODEM.sendf("AT+USECMNG=0,%d,\"%s\",%d", type, name, len);
   if (MODEM.waitForPrompt() != 1) {
@@ -161,14 +161,22 @@ int GSMCertificates::save(int type, const char* name, const char* data, size_t l
     return 0;
   }
 
+  if (doList) {
+    list();
+  }
+
   return 1;
 }
 
-int GSMCertificates::remove(int type, const char* name)
+int GSMCertificates::remove(int type, const char* name, bool doList)
 {
   MODEM.sendf("AT+USECMNG=2,%d,\"%s\"", type, name);
   if (MODEM.waitForResponse(2000) != 1) {
     return 0;
+  }
+
+  if (doList) {
+    list();
   }
 
   return 1;
@@ -177,7 +185,7 @@ int GSMCertificates::remove(int type, const char* name)
 int GSMCertificates::removeAll()
 {
   for (uint8_t i = 0; i < _certCount; i++) {
-    if (remove(_certs[i].type, _certs[i].name) != 1) {
+    if (remove(_certs[i].type, _certs[i].name, false) != 1) {
       return 0;
     }
   }
