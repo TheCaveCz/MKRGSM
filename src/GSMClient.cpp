@@ -119,7 +119,7 @@ int GSMClient::ready()
     case CLIENT_STATE_WAIT_ENABLE_SSL_RESPONSE: {
       if (ready > 1) {
         _state = CLIENT_STATE_CLOSE_SOCKET;
-      } else if (__sslProfile == -1) {
+      } else if (_sslProfile == -1) {
         _state = CLIENT_STATE_MANAGE_SSL_PROFILE;
       } else {
         _state = CLIENT_STATE_CONNECT;
