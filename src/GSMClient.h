@@ -141,6 +141,10 @@ public:
    */
   void setSocketTimeout(unsigned long timeout);
 
+  /** Return amount of unsent bytes in modem buffer
+   */
+  int getUnsentBytes();
+
   virtual void handleUrc(const String& urc);
 
 private:

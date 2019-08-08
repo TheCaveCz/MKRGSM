@@ -478,6 +478,30 @@ void GSMClient::setConnectTimeout(unsigned long timeout)
   _connectTimeout = timeout;
 }
 
+int GSMClient::getUnsentBytes() {
+  if (_socket < 0) {
+    return -1;
+  }
+
+  MODEM.sendf("AT+USOCTL=%d,11",_socket);
+  String result;
+  if (MODEM.waitForResponse(1000, &result) != 1) {
+    return -1;
+  }
+
+  if (!result.startsWith("+USOCTL: ")) {
+    return -1;
+  }
+
+  // +USOCTL: 0,11,229
+  int index = result.lastIndexOf(',');
+  if (index < 0) {
+    return -1;
+  }
+
+  return result.substring(index+1).toInt();
+}
+
 void GSMClient::handleUrc(const String& urc)
 {
   if (urc.startsWith("+UUSORD: ")) {
